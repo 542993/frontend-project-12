@@ -12,8 +12,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@fastify/static": "^6.10.1",
-    "@hexlet/chat-server": "^1.1.6",
-    "fastify-static": "^4.7.0"
+    "@hexlet/chat-server": "^1.1.6"
   }
 }
