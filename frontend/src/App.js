@@ -1,40 +1,22 @@
-import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
   BrowserRouter,
   Routes,
   Route,
   Navigate,
-  useLocation,
 } from 'react-router-dom';
-  import LoginPage from './Components/Pages/LoginPage';
+import LoginPage from './Components/Pages/LoginPage';
 import MainPage from './Components/Pages/MainPage';
 import NotFoundPage from './Components/Pages/NotFoundPage';
 import './App.css';
-import AuthContext from './context/index.jsx';
+import AuthProvider from './context/authProvider';
+
 import useAuth from './hooks';
 
-const AuthProvider = ({ children }) => {
-  const [loggedIn, setLoggedIn] = useState(false);
-
-  const logIn = () => setLoggedIn(true);
-  const logOut = () => {
-    localStorage.removeItem('userId');
-    setLoggedIn(false);
-  };
-
-  return (
-    // eslint-disable-next-line react/jsx-no-constructed-context-values
-    <AuthContext.Provider value={{ loggedIn, logIn, logOut }}>
-      {children}
-    </AuthContext.Provider>
-  );
-};
 const PrivateRoute = ({ children }) => {
-  const auth = useAuth();
-  const location = useLocation();
+  const { user } = useAuth();
   return (
-    auth.loggedIn ? children : <Navigate to="/login" state={{ from: location }} />
+    user ? children : <Navigate to="/login" replace />
   );
 };
 

@@ -2,18 +2,21 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useFormik } from 'formik';
 import { Button, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import * as Yup from 'yup'; 
-import axios from 'axios';
+import * as Yup from 'yup';
 import useAuth from '../../hooks/index.jsx';
 
 const LoginPage = () => {
+  const { user, logIn, signIn } = useAuth();
   const [authFailed, setAuthFailed] = useState(false);
-  const auth = useAuth();
   const inputRef = useRef();
   const navigate = useNavigate();
   useEffect(() => {
     inputRef.current.focus();
   }, []);
+
+  useEffect(() => {
+    if (user) navigate('/');
+  }, [user, navigate]);
 
   const formik = useFormik({
     initialValues: {
@@ -22,27 +25,19 @@ const LoginPage = () => {
     },
     validationSchema: Yup.object({
       username: Yup.string()
-        .min(5, 'Must be min 5 characters')
-        .max(11, 'Must be 11 characters or less')
+        .min(3, 'Must be min 5 characters')
+        .max(20, 'Must be 11 characters or less')
         .required('Required'),
       password: Yup.string()
-        .min(5, 'Must be min 5 characters')
-        .max(11, 'Must be 11 characters or less')
         .required('Required'),
     }),
 
     onSubmit: async (values) => {
-      setAuthFailed(false);
       try {
-        console.log('value', values);
-        const res = await axios.post('/api/v1/login', values);
-        console.log('post', res.data.token);
-        localStorage.setItem('userId', JSON.stringify({ token: res.data.token }));
-        console.log('saved token', localStorage.getItem('userId'));
-        auth.logIn();
-        navigate('/');
-      } catch (err) {
+        const userData = await signIn(values);
+        logIn(userData);
         formik.setSubmitting(false);
+      } catch (err) {
         if (err.isAxiosError && err.response.status === 401) {
           setAuthFailed(true);
           inputRef.current.select();
@@ -68,7 +63,7 @@ const LoginPage = () => {
                   name="username"
                   id="username"
                   autoComplete="username"
-                  isInvalid={authFailed}
+                  isInvalid={(formik.touched.username && formik.errors.username) || authFailed}
                   required
                   ref={inputRef}
                 />
@@ -83,7 +78,7 @@ const LoginPage = () => {
                   name="password"
                   id="password"
                   autoComplete="current-password"
-                  isInvalid={authFailed}
+                  isInvalid={(formik.touched.password && formik.errors.password) || authFailed}
                   required
                 />
                <Form.Control.Feedback type="invalid">the username or password is incorrect</Form.Control.Feedback>
