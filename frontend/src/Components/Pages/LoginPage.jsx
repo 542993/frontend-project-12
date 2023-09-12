@@ -1,96 +1,118 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useFormik } from 'formik';
-import { Button, Form } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
-import * as Yup from 'yup';
-import useAuth from '../../hooks/index.jsx';
+import React, { useState, useEffect, useRef } from "react";
+import { useFormik } from "formik";
+import { Button, Form, FloatingLabel, Image } from "react-bootstrap";
+import { useNavigate, Link } from "react-router-dom";
+import * as yup from "yup";
+import useAuth from "../../hooks/index.jsx";
+
+import AuthContainer from '../AuthContainer';
+import { routesApp } from '../../routes.js'
+import img from '../../assets/loginPage.jpeg';
 
 const LoginPage = () => {
   const { user, logIn, signIn } = useAuth();
-  const [authFailed, setAuthFailed] = useState(false);
-  const inputRef = useRef();
+  const inputEl = useRef(null);
   const navigate = useNavigate();
-  useEffect(() => {
-    inputRef.current.focus();
-  }, []);
+  const [authFailed, setAuthFailed] = useState(false);
 
   useEffect(() => {
-    if (user) navigate('/');
+    if (user) navigate(routesApp.homePage);
   }, [user, navigate]);
 
-  const formik = useFormik({
+  useEffect(() => {
+    inputEl.current.focus();
+  }, []);
+
+  const handleSubmitForm = async (formData, setSubmitting) => {
+    try {
+      const userData = await signIn(formData);
+      logIn(userData);
+      setSubmitting(false);
+    } catch (err) {
+      switch (err.code) {
+        case 'ERR_NETWORK':
+          throw new Error(`Ошибка соединения: ${err}`);
+        case 'ERR_BAD_REQUEST':
+          setAuthFailed(true);
+          throw new Error(`Неверные имя пользователя или пароль: ${err}`);
+        default:
+          throw new Error(`Неизвестная ошибка при авторизации: ${err}`);
+      }
+    }
+  };
+
+  const validationSchema = yup.object().shape({
+    username: yup.string()
+      .min(3, "От 3 до 20 символов")
+      .max(20, "От 3 до 20 символов")
+      .required("Обязательное поле"),
+    password: yup.string()
+      .required("Обязательное поле"),
+  });
+
+  const f = useFormik({
     initialValues: {
       username: '',
       password: '',
     },
-    validationSchema: Yup.object({
-      username: Yup.string()
-        .min(3, 'Must be min 5 characters')
-        .max(20, 'Must be 11 characters or less')
-        .required('Required'),
-      password: Yup.string()
-        .required('Required'),
-    }),
-
-    onSubmit: async (values) => {
-      try {
-        const userData = await signIn(values);
-        logIn(userData);
-        formik.setSubmitting(false);
-      } catch (err) {
-        if (err.isAxiosError && err.response.status === 401) {
-          setAuthFailed(true);
-          inputRef.current.select();
-          return;
-        }
-        throw err;
-      }
-    },
+    validationSchema,
+    onSubmit: (values, { setSubmitting }) => handleSubmitForm(values, setSubmitting),
   });
 
   return (
-    <div className="container-fluid">
-      <div className="row justify-content-center pt-5">
-        <div className="col-sm-4">
-          <Form onSubmit={formik.handleSubmit} className="p-3">
-            <fieldset disabled={formik.isSubmitting}>
-              <Form.Group>
-                <Form.Label htmlFor="username">Username</Form.Label>
-                <Form.Control
-                  onChange={formik.handleChange}
-                  value={formik.values.username}
-                  placeholder="username"
-                  name="username"
-                  id="username"
-                  autoComplete="username"
-                  isInvalid={(formik.touched.username && formik.errors.username) || authFailed}
-                  required
-                  ref={inputRef}
-                />
-              </Form.Group>
-              <Form.Group>
-                <Form.Label htmlFor="password">Password</Form.Label>
-                <Form.Control
-                  type="password"
-                  onChange={formik.handleChange}
-                  value={formik.values.password}
-                  placeholder="password"
-                  name="password"
-                  id="password"
-                  autoComplete="current-password"
-                  isInvalid={(formik.touched.password && formik.errors.password) || authFailed}
-                  required
-                />
-               <Form.Control.Feedback type="invalid">the username or password is incorrect</Form.Control.Feedback>
-              </Form.Group>
-              <Button type="submit" variant="outline-primary">Submit</Button>
-            </fieldset>
-          </Form>
+    <AuthContainer>
+      <div className="card-body row p-5">
+        <div className="col-12 col-md-6 d-flex align-items-center justify-content-center">
+          <Image src={img} alt="Авторизация" roundedCircle />
+        </div>
+        <Form onSubmit={f.handleSubmit} className="col-12 col-md-6 mt-3 mt-mb-0">
+          <h1 className="text-center mb-4">Войти</h1>
+          <FloatingLabel controlId="floatingUsername" label="Ваш ник" className="mb-3">
+            <Form.Control
+              ref={inputEl}
+              onChange={f.handleChange}
+              value={f.values.username}
+              name="username"
+              autoComplete="username"
+              placeholder="Ваш ник"
+              isInvalid={(f.touched.username && f.errors.username) || authFailed}
+              disabled={f.isSubmitting}
+            />
+            <Form.Control.Feedback type="invalid">{f.errors.username}</Form.Control.Feedback>
+          </FloatingLabel>
+          <FloatingLabel controlId="floatingPassword" label="Пароль" className="mb-4">
+            <Form.Control
+              onChange={f.handleChange}
+              value={f.values.password}
+              name="password"
+              autoComplete="current-password"
+              type="password"
+              placeholder="Пароль"
+              isInvalid={(f.touched.password && f.errors.password) || authFailed}
+              disabled={f.isSubmitting}
+            />
+            <Form.Control.Feedback type="invalid">
+              {authFailed ? 'Неверные имя пользователя или пароль' : f.errors.password}
+            </Form.Control.Feedback>
+          </FloatingLabel>
+          <Button
+            type="submit"
+            variant="outline-primary"
+            className="w-100 mb-3 btn"
+            disabled={f.isSubmitting || !f.values.password || !f.values.username}
+          >
+            Войти
+          </Button>
+        </Form>
+      </div>
+      <div className="card-footer p-4">
+        <div className="text-center">
+          <span>Нет аккаунта?</span>
+          <Link to={routesApp.signupPage}>Регистрация</Link>
         </div>
       </div>
-    </div>
+    </AuthContainer>
   );
-// END
 };
 
 export default LoginPage;

@@ -1,20 +1,21 @@
-import React, { useState } from 'react';
-import authAPI from '../api/authAPI';
-import AuthContext from '.';
+import React, { useState } from "react";
+import authAPI from "../api/authAPI";
+import AuthContext from ".";
 
 const AuthProvider = ({ children }) => {
   const { signIn, signUp } = authAPI();
-  const currentUser = JSON.parse(localStorage.getItem('user'));
+  const currentUser = JSON.parse(localStorage.getItem("user"));
+  console.log("currentUser", currentUser);
   const initialState = currentUser || null;
   const [user, setUser] = useState(initialState);
 
   const logIn = (userData) => {
-    console.log(userData);
-    localStorage.setItem('user', JSON.stringify(userData));
+    console.log('userData',userData);
+    localStorage.setItem("user", JSON.stringify(userData));
     setUser(userData);
   };
   const logOut = () => {
-    localStorage.removeItem('user');
+    localStorage.removeItem("user");
     setUser(null);
   };
 
