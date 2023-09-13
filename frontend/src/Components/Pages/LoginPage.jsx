@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useRef } from "react";
-import { useFormik } from "formik";
-import { Button, Form, FloatingLabel, Image } from "react-bootstrap";
-import { useNavigate, Link } from "react-router-dom";
-import * as yup from "yup";
-import useAuth from "../../hooks/index.jsx";
+import React, { useState, useEffect, useRef } from 'react';
+import { useFormik } from 'formik';
+import { Button, Form, FloatingLabel, Image } from 'react-bootstrap';
+import { useNavigate, Link } from 'react-router-dom';
+import * as yup from 'yup';
+import useAuth from '../../hooks/index.jsx';
 
 import AuthContainer from '../AuthContainer';
-import { routesApp } from '../../routes.js'
+import { routesApp } from '../../routes.js';
 import img from '../../assets/loginPage.jpeg';
 
 const LoginPage = () => {
@@ -16,7 +16,11 @@ const LoginPage = () => {
   const [authFailed, setAuthFailed] = useState(false);
 
   useEffect(() => {
-    if (user) navigate(routesApp.homePage);
+    if (user) {
+      console.log('4');
+      navigate(routesApp.homePage);
+    }
+    console.log('2');
   }, [user, navigate]);
 
   useEffect(() => {
@@ -26,6 +30,7 @@ const LoginPage = () => {
   const handleSubmitForm = async (formData, setSubmitting) => {
     try {
       const userData = await signIn(formData);
+      console.log('3');
       logIn(userData);
       setSubmitting(false);
     } catch (err) {
@@ -43,11 +48,11 @@ const LoginPage = () => {
 
   const validationSchema = yup.object().shape({
     username: yup.string()
-      .min(3, "От 3 до 20 символов")
-      .max(20, "От 3 до 20 символов")
-      .required("Обязательное поле"),
+      .min(3, 'От 3 до 20 символов')
+      .max(20, 'От 3 до 20 символов')
+      .required('Обязательное поле'),
     password: yup.string()
-      .required("Обязательное поле"),
+      .required('Обязательное поле'),
   });
 
   const f = useFormik({
@@ -59,6 +64,7 @@ const LoginPage = () => {
     onSubmit: (values, { setSubmitting }) => handleSubmitForm(values, setSubmitting),
   });
 
+  console.log(f);
   return (
     <AuthContainer>
       <div className="card-body row p-5">

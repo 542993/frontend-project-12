@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import Header from '../Header';
-import img from '../../assets/notFound.svg';
+import img from '../../assets/notFound.jpg';
 import { routesApp } from '../../routes';
 
 const NotFoundPage = () => {
@@ -8,11 +8,11 @@ const NotFoundPage = () => {
     <div className="d-flex flex-column h-100">
       <Header />
       <div className="text-center">
-        <img alt="Страница не найдена" src={img} className="img-fluid h-25" />
+        <img alt="Страница не найдена" src={img} className="img-fluid" />
         <h1 className="h4 text-muted">Страница не найдена</h1>
         <p className="text-muted">
-        Но вы можете перейти
-          <Link to={routesApp.homePage}>на главную страницу</Link>
+        <span>Но вы можете перейти</span>
+          <Link className="px-2" to={routesApp.homePage}>на главную страницу</Link>
         </p>
       </div>
     </div>

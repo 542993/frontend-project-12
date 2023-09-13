@@ -28,7 +28,7 @@ const channelsSlice = createSlice({
     renameChannel: channelsAdapter.upsertOne,
     removeChannel: (state, { payload }) => {
       console.log('state', state);
-      channelsAdapter.removeOne(state, payload);
+      channelsAdapter.removeOne(state, { payload });
     },
     setCurrentChannel: (state, { payload }) => {
       state.currentChannelId = payload;
@@ -36,12 +36,11 @@ const channelsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      // Вызывается в том случае если запрос успешно выполнился
       .addCase(fetchData.fulfilled, (state, { payload }) => {
         channelsAdapter.addMany(state, payload.channels);
         state.currentChannelId = payload.currentChannelId;
       })
-      // Вызывается в случае ошибки
+
       .addCase(fetchData.rejected, (state, action) => {
         state.loadingStatus = 'failed';
         state.error = action.error;
@@ -52,7 +51,7 @@ const channelsSlice = createSlice({
 console.log('initial', initialState);
 console.log('chanelsadapter', channelsAdapter);
 console.log(channelsSlice);
-export const selectors = channelsAdapter.getSelectors((state) => state);
+export const selectors = channelsAdapter.getSelectors((state) => state.channels);
 console.log('selectors', selectors);
 export const { addChannel,
   renameChannel,
