@@ -3,12 +3,14 @@ import { useDispatch } from 'react-redux';
 import { fetchData } from '../../slices/channelsSlice';
 import Header from '../Header';
 import ChannelsPanel from '../ChannelsPanel';
+import MessagesPanel from '../MessagesPannel';
 
 const MainPage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchData());
+    console.log('data is received');
   /* eslint-disable-next-line react-hooks/exhaustive-deps */
   }, []);
 
@@ -18,6 +20,7 @@ const MainPage = () => {
         <div className="container h-100 my-4 overflow-hidden rounded shadow">
           <div className="row h-100 bg-white flex-md-row">
            <ChannelsPanel />
+           <MessagesPanel />
           </div>
         </div>
       </div>
