@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
-import useAuth from '../hooks/index';
+import { useAuth } from '../hooks/index';
 
 const Header = () => {
   const { user, logOut } = useAuth();

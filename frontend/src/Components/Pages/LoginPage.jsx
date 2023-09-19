@@ -3,7 +3,7 @@ import { useFormik } from 'formik';
 import { Button, Form, FloatingLabel, Image } from 'react-bootstrap';
 import { useNavigate, Link } from 'react-router-dom';
 import * as yup from 'yup';
-import useAuth from '../../hooks/index.jsx';
+import { useAuth } from '../../hooks/index.jsx';
 
 import AuthContainer from '../AuthContainer';
 import { routesApp } from '../../routes.js';
@@ -17,10 +17,8 @@ const LoginPage = () => {
 
   useEffect(() => {
     if (user) {
-      console.log('4');
       navigate(routesApp.homePage);
     }
-    console.log('2');
   }, [user, navigate]);
 
   useEffect(() => {

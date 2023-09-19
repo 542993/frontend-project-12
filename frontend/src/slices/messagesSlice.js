@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import { createSlice, createEntityAdapter, current } from '@reduxjs/toolkit';
+import { createSlice, createEntityAdapter } from '@reduxjs/toolkit';
 import { fetchData } from './channelsSlice';
 
 const messagesAdapter = createEntityAdapter();
@@ -8,10 +8,7 @@ const messagesSlice = createSlice({
   name: 'messages',
   initialState: messagesAdapter.getInitialState(),
   reducers: {
-    addMessage: (state, { payload }) => {
-      messagesAdapter.addOne(state, { payload });
-      console.log('store messages', current(state));
-    },
+    addMessage: messagesAdapter.addOne,
   },
   extraReducers: (builder) => {
     builder

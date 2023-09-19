@@ -6,6 +6,7 @@ const MessagesList = ({ messages }) => {
   const currentChannelId = useSelector((state) => state.channels.currentChannelId);
   const currentChannel = channels.find((channel) => channel.id === currentChannelId);
   const header = currentChannel ? currentChannel.name : '';
+  console.log('messages', messages);
 
   console.log('currentChannelId', currentChannelId);
   const renderMessages = () => {

@@ -8,5 +8,4 @@ const store = configureStore({
     messages,
   },
 });
-console.log('store', store);
 export default store;

@@ -10,7 +10,6 @@ const MainPage = () => {
 
   useEffect(() => {
     dispatch(fetchData());
-    console.log('data is received');
   /* eslint-disable-next-line react-hooks/exhaustive-deps */
   }, []);
 
