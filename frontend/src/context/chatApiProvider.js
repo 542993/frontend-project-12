@@ -9,10 +9,16 @@ export const ChatApiProvider = ({ socket, children }) => {
 
   const chatAPI = {
     addMessage: (msg, handleResponse) => {
-      socket.emit('newMessage', msg, (res) => checkStatus(res, handleResponse));
+      socket.emit('newMessage', msg, (res) => {
+        console.log('response', res);
+        checkStatus(res, handleResponse);
+      });
     },
     addChannel: (data, handleResponse) => {
-      socket.emit('newChannel', data, (res) => checkStatus(res, handleResponse));
+      socket.emit('newChannel', data, (res) => {
+        console.log('data', data);
+        checkStatus(res, handleResponse);
+      });
     },
     renameChannel: (data, handleResponse) => {
       socket.emit('renameChannel', data, (res) => checkStatus(res, handleResponse));
