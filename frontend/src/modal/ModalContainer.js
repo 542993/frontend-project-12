@@ -4,13 +4,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setActiveModal } from '../slices/modalSlice';
 import getModal from '.';
 
-
 const ModalContainer = () => {
   const dispatch = useDispatch();
   const activeModal = useSelector((state) => state.modals.activeModal);
   const modalTitle = {
     add: 'Добавить канал',
-    delete: 'Удалить канал',
+    remove: 'Удалить канал',
     rename: 'Переименовать канал',
   };
   console.log('lol', getModal(activeModal.type));

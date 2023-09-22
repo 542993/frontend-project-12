@@ -19,6 +19,7 @@ const initialState = channelsAdapter.getInitialState({
   error: null,
 });
 /* eslint no-param-reassign: "error" */
+const defaultChannelId = 1;
 const channelsSlice = createSlice({
   name: 'channels',
   initialState,
@@ -26,7 +27,10 @@ const channelsSlice = createSlice({
     addChannel: channelsAdapter.addOne,
     renameChannel: channelsAdapter.upsertOne,
     removeChannel: (state, { payload }) => {
-      channelsAdapter.removeOne(state, { payload });
+      if (state.currentChannelId === payload) {
+        state.currentChannelId = defaultChannelId;
+      }
+      channelsAdapter.removeOne(state, payload);
     },
     setCurrentChannel: (state, { payload }) => {
       state.currentChannelId = payload;
