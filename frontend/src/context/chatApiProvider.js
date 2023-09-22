@@ -21,6 +21,7 @@ export const ChatApiProvider = ({ socket, children }) => {
       });
     },
     renameChannel: (data, handleResponse) => {
+      console.log('renameData', data);
       socket.emit('renameChannel', data, (res) => checkStatus(res, handleResponse));
     },
     removeChannel: (data, handleResponse) => {
