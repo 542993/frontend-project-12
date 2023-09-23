@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import LoginPage from './Components/Pages/LoginPage';
 import MainPage from './Components/Pages/MainPage';
 import NotFoundPage from './Components/Pages/NotFoundPage';
+import SignUp from './Components/Pages/SignUp';
 import './App.css';
 import { useAuth } from './hooks';
 
@@ -24,6 +25,7 @@ const App = () => (
       />
       <Route path="/login" element={<LoginPage />} />
       <Route path="*" element={<NotFoundPage />} />
+      <Route path="/signup" element={<SignUp />} />
     </Routes>
   </BrowserRouter>
 );
