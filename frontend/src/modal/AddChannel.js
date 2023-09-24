@@ -1,4 +1,5 @@
 import { Button, Form } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
@@ -7,6 +8,7 @@ import { setActiveModal } from '../slices/modalSlice';
 import { setCurrentChannel, selectors } from '../slices/channelsSlice';
 
 const AddChannel = () => {
+  const { t } = useTranslation();
   const { addChannel } = useChat();
   const channels = useSelector(selectors.selectAll);
   const channelNames = channels.map((item) => item.name);
@@ -14,10 +16,10 @@ const AddChannel = () => {
   const dispatch = useDispatch();
   const validationSchema = yup.object().shape({
     name: yup.string()
-      .min(3, 'От 3 до 20 символов')
-      .max(20, 'От 3 до 20 символов')
-      .required('Обязательное поле')
-      .notOneOf(channelNames, 'Должно быть уникальным'),
+      .min(3, t('error.wrongLength'))
+      .max(20, t('error.wrongLength'))
+      .required(t('error.required'))
+      .notOneOf(channelNames, t('error.mustUnique')),
   });
 
   const f = useFormik({
@@ -38,7 +40,7 @@ const AddChannel = () => {
   });
   return (
   <Form onSubmit={f.handleSubmit}>
-      <Form.Label className="visually-hidden" htmlFor="name">Имя канала</Form.Label>
+      <Form.Label className="visually-hidden" htmlFor="name">{t('modal.label')}</Form.Label>
       <Form.Control
         type="text"
         id="name"
@@ -52,9 +54,9 @@ const AddChannel = () => {
       <Form.Control.Feedback type="invalid">
         {f.errors.name}
       </Form.Control.Feedback>
-      <div className="d-flex justify-contend-end">
-        <Button variant="secondary" onClick={() => dispatch(setActiveModal(null))} className="me-2">Отменить</Button>
-        <Button variant="primary" type="submit">Отправить</Button>
+      <div className="d-flex justify-content-end">
+        <Button variant="secondary" onClick={() => dispatch(setActiveModal(null))} className="me-2">{t('modal.cancel')}</Button>
+        <Button variant="primary" type="submit">{t('modal.submit')}</Button>
       </div>
   </Form>
   );

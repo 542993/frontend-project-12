@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import { Button, Form, InputGroup } from 'react-bootstrap';
@@ -6,6 +7,7 @@ import { ArrowRightSquareFill } from 'react-bootstrap-icons';
 import { useChat, useAuth } from '../hooks';
 
 const MessageForm = () => {
+  const { t } = useTranslation();
   const currentChannelId = useSelector((state) => state.channels.currentChannelId);
   const inputEl = useRef(null);
   const { addMessage } = useChat();
@@ -32,10 +34,10 @@ const MessageForm = () => {
   });
   const renderDeliveryStatus = () => {
     if (f.isSubmitting) {
-      return 'Сообщение отправляется';
+      return t('messagesStatus.sending');
     }
     if (delivered) {
-      return 'Доставлено';
+      return t('messagesStatus.delivered');
     }
     return '';
   };
@@ -50,8 +52,8 @@ const MessageForm = () => {
           onChange={f.handleChange}
           name="message"
           id="message"
-          aria-label="Новое сообщение"
-          placeholder="Введите сообщение..."
+          aria-label={t('messageLabel')}
+          placeholder={t('messagePlaceholder')}
           className="border-0 p-0 ps-2"
           type="text"
           value={f.values.message}
@@ -65,7 +67,7 @@ const MessageForm = () => {
           disabled={f.isSubmitting || !f.values.message}
         >
           <ArrowRightSquareFill size={20} />
-          <span className="visually-hidden">Отправить</span>
+          <span className="visually-hidden">{t('messageButton')}</span>
         </Button>
       </InputGroup>
     </Form>

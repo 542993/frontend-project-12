@@ -1,7 +1,9 @@
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import { selectors } from '../slices/channelsSlice';
 
 const MessagesList = ({ messages }) => {
+  const { t } = useTranslation();
   const channels = useSelector(selectors.selectAll);
   const currentChannelId = useSelector((state) => state.channels.currentChannelId);
   const currentChannel = channels.find((channel) => channel.id === currentChannelId);
@@ -25,8 +27,7 @@ const MessagesList = ({ messages }) => {
           <b>{`# ${header}`}</b>
         </p>
         <span className="text-muted">
-          { messages.length }
-          Сообщений
+          { t('messagesCount.msg', { count: messages.length }) }
         </span>
       </div>
       <div id="messages-box" className="chat-messages overflow-auto px-5 ">
