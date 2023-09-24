@@ -15,6 +15,7 @@ export default {
       wrongData: 'Неверные имя пользователя или пароль',
       passwordsMustMutch: 'Пароли должны совпадать',
       mustUnique: 'Должно быть уникальным',
+      userAlreadyExist: 'Такой пользователь уже существует',
     },
     header: {
       title: 'Hexlet chat',

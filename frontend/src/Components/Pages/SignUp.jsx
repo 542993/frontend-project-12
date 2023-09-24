@@ -40,7 +40,7 @@ const SignUp = () => {
         case 'ERR_BAD_REQUEST':
           setSignUpFailed(true);
           setSubmitting(false);
-          throw new Error(`{t('error.wrongData')} ${err}`);
+          throw new Error(`${t('error.userAlreadyExist')}: ${err}`);
         default:
           throw new Error(`t('notice.signUp') ${err}`);
       }
