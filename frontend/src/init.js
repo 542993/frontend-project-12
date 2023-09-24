@@ -1,6 +1,8 @@
 import { Provider as StoreProvider } from 'react-redux';
 import io from 'socket.io-client';
 import i18next from 'i18next';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { I18nextProvider, initReactI18next } from 'react-i18next';
 import App from './App';
 import store from './slices';
@@ -43,6 +45,7 @@ const init = async () => {
         <StoreProvider store={store}>
             <ChatApiProvider socket={socket}>
                 <App />
+                <ToastContainer />
             </ChatApiProvider>
         </StoreProvider>
       </I18nextProvider>

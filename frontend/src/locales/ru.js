@@ -61,5 +61,14 @@ export default {
     messagePlaceholder: 'Введите сообщение...',
     messageLabel: 'Новое сообщение',
     messageButton: 'Отправить',
+    notice: {
+      newChannel: 'Канал создан',
+      renameChannel: 'Канал переименован',
+      removeChannel: 'Канал удалён',
+      netWorkError: 'Ошибка соединения',
+      signIn: 'Неизвестная ошибка при авторизации',
+      signUp: 'Неизвестная ошибка при регистрации',
+      getData: 'Неизвестная ошибка при загрузке данных',
+    },
   },
 };

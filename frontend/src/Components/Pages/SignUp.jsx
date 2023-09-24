@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 import { useFormik } from 'formik';
 import { Button, Form, FloatingLabel, Image } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
@@ -32,16 +33,16 @@ const SignUp = () => {
       logIn(userData);
       setSubmitting(false);
     } catch (err) {
-      switch (err.response.status) {
-        case 404:
-          console.log('error code is', err.response.status);
-          throw new Error(`Ошибка соединения: ${err}`);
-        case 409:
-          console.log('error code is', err.response.status);
+      switch (err.code) {
+        case 'ERR_NETWORK':
+          toast.error(t('notice.netWorkError'));
+          throw new Error(`t('notice.netWorkError'): ${err}`);
+        case 'ERR_BAD_REQUEST':
           setSignUpFailed(true);
-          throw new Error(`Такой пользователь уже существует: ${err}`);
+          setSubmitting(false);
+          throw new Error(`{t('error.wrongData')} ${err}`);
         default:
-          throw new Error(`Неизвестная ошибка при авторизации: ${err}`);
+          throw new Error(`t('notice.signUp') ${err}`);
       }
     }
   };

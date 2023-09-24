@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 import { Button, Form } from 'react-bootstrap';
@@ -16,6 +17,7 @@ const RemoveChannel = () => {
       const handleResponse = () => {
         dispatch(setActiveModal(null));
         setSubmitting(false);
+        toast.success(t('notice.removeChannel'));
       };
       removeChannel({ id: activeModal.id }, handleResponse);
     },

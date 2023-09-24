@@ -1,5 +1,6 @@
 import { Button, Form } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
@@ -34,6 +35,7 @@ const AddChannel = () => {
         dispatch(setCurrentChannel(data.id));
         dispatch(setActiveModal(null));
         setSubmitting(false);
+        toast.success(t('notice.newChannel'));
       };
       addChannel({ name }, handleResponse);
     },

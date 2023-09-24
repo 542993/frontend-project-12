@@ -1,5 +1,6 @@
 import { Button, Form } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
@@ -39,6 +40,7 @@ const RenameChannel = () => {
       const handleResponse = () => {
         dispatch(setActiveModal(null));
         setSubmitting(false);
+        toast.success(t('notice.renameChannel'));
       };
       renameChannel({ ...targetChannel, name }, handleResponse);
     },
