@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import filter from 'leo-profanity';
 import { useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import { Button, Form, InputGroup } from 'react-bootstrap';
@@ -16,9 +17,10 @@ const MessageForm = () => {
   const f = useFormik({
     initialValues: { message: '' },
     onSubmit: async ({ message }, { resetForm, setSubmitting }) => {
+      const filteredText = filter.clean(message);
       const newMessage = {
         channelId: currentChannelId,
-        body: message,
+        body: filteredText,
         username: user.username,
       };
       const handleResponse = ({ status }) => {
@@ -59,7 +61,7 @@ const MessageForm = () => {
           value={f.values.message}
           disabled={f.isSubmitting}
         />
-        <Form.Label className="visually-hidden" htmlFor="message">Новое сообщение</Form.Label>
+        <Form.Label className="visually-hidden" htmlFor="message">{t('messageLabel')}</Form.Label>
         <Button
           type="submit"
           variant={null}

@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { toast } from 'react-toastify';
 import { useFormik } from 'formik';
 import { Button, Form, FloatingLabel, Image } from 'react-bootstrap';
 import { useNavigate, Link } from 'react-router-dom';
@@ -35,14 +34,13 @@ const LoginPage = () => {
     } catch (err) {
       switch (err.code) {
         case 'ERR_NETWORK':
-          toast.error(t('notice.netWorkError'));
-          throw new Error(`${t('notice.netWorkError')}: ${err}`);
+          throw new Error(`Ошибка соединения: ${err}`);
         case 'ERR_BAD_REQUEST':
           setAuthFailed(true);
           setSubmitting(false);
           throw new Error(`{t('error.wrongData')} ${err}`);
         default:
-          throw new Error(`${t('notice.signIn')}: ${err}`);
+          throw new Error(`Неизвестная ошибка при авторизации: ${err}`);
       }
     }
   };
