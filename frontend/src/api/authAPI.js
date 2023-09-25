@@ -1,5 +1,5 @@
-import axios from "axios";
-import routesAPI from "../routes";
+import axios from 'axios';
+import routesAPI from '../routes';
 
 const authAPI = () => {
   const signIn = async (userData) => {

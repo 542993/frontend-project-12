@@ -5,19 +5,12 @@ const rollbarConfig = {
   accessToken: '3ed12951194c4bfd81d9cd11052481cf',
   environment: 'testenv',
 };
+const RollbarProvider = ({ children }) => (
+  <Provider config={rollbarConfig}>
+    <ErrorBoundary>
+      {children}
+    </ErrorBoundary>
+  </Provider>
+);
 
-function TestError() {
-  const a = null;
-  return a.hello();
-}
-const RollbarProvider = ({ children }) => {
-  return (
-    <Provider config={rollbarConfig}>
-      <ErrorBoundary>
-        <TestError />
-        {children}
-      </ErrorBoundary>
-    </Provider>
-  );
-};
 export default RollbarProvider;
