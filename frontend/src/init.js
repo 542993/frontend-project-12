@@ -4,7 +4,7 @@ import i18next from 'i18next';
 import filter from 'leo-profanity';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { I18nextProvider, initReactI18next } from "react-i18next";
+import { I18nextProvider, initReactI18next } from 'react-i18next';
 import App from './App';
 import RollbarProvider from './Components/RollbarProvider';
 import store from './slices';
@@ -41,6 +41,10 @@ const init = async () => {
         escapeValue: false,
       },
     });
+  function TestError() {
+    const a = null;
+    return a.hello();
+  }
 
   return (
     <AuthProvider>
@@ -49,6 +53,7 @@ const init = async () => {
             <ChatApiProvider socket={socket}>
               <RollbarProvider>
                 <App />
+                <TestError />
                 <ToastContainer />
               </RollbarProvider>
             </ChatApiProvider>
