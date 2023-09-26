@@ -34,7 +34,6 @@ const ChannelsList = () => {
       </li>
     );
   });
-  console.log('channelList', channels);
   return channelsList;
 };
 
