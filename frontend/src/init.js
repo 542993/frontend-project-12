@@ -41,9 +41,10 @@ const init = async () => {
         escapeValue: false,
       },
     });
-  function TestError() {
-    return a;
-  }
+  // function TestError() {
+  //   const a = null;
+  //   return a.hello1();
+  // }
 
   return (
     <AuthProvider>
@@ -52,7 +53,6 @@ const init = async () => {
             <ChatApiProvider socket={socket}>
               <RollbarProvider>
                 <App />
-                <TestError />
                 <ToastContainer />
               </RollbarProvider>
             </ChatApiProvider>

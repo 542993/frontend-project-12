@@ -9,6 +9,7 @@ import { useAuth } from './hooks';
 
 const PrivateRoute = ({ children }) => {
   const { user } = useAuth();
+  // console.log(a);
   return user ? children : <Navigate to="/login" />;
 };
 
