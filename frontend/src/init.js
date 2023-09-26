@@ -6,8 +6,8 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { I18nextProvider, initReactI18next } from 'react-i18next';
 import App from './App';
-import RollbarProvider from './Components/RollbarProvider';
 import store from './slices';
+import RollbarProvider from './Components/RollbarProvider';
 import { ChatApiProvider } from './context/chatApiProvider';
 import AuthProvider from './context/authProvider';
 import { addChannel, renameChannel, removeChannel } from './slices/channelsSlice';
@@ -42,8 +42,7 @@ const init = async () => {
       },
     });
   function TestError() {
-    const a = null;
-    return a.hello();
+    return a;
   }
 
   return (
