@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { ChatApiContext } from '.';
 
 export const ChatApiProvider = ({ socket, children }) => {
@@ -7,7 +8,7 @@ export const ChatApiProvider = ({ socket, children }) => {
     }
   };
 
-  const chatAPI = {
+  const chatAPI = useMemo(() => ({
     addMessage: (msg, handleResponse) => {
       socket.emit('newMessage', msg, (res) => {
         console.log('response', res);
@@ -27,7 +28,8 @@ export const ChatApiProvider = ({ socket, children }) => {
     removeChannel: (data, handleResponse) => {
       socket.emit('removeChannel', data, (res) => checkStatus(res, handleResponse));
     },
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }), []);
 
   return (
     <ChatApiContext.Provider value={chatAPI}>
