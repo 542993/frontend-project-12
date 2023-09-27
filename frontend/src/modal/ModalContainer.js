@@ -12,7 +12,6 @@ const ModalContainer = () => {
     remove: 'Удалить канал',
     rename: 'Переименовать канал',
   };
-  console.log('lol', getModal(activeModal.type));
   return (
     <Modal show={activeModal}>
       <Modal.Header>
