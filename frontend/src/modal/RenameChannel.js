@@ -1,4 +1,5 @@
 import { Button, Form } from 'react-bootstrap';
+import filter from 'leo-profanity';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import { useEffect, useRef } from 'react';
@@ -15,7 +16,6 @@ const RenameChannel = () => {
   const channels = useSelector(selectors.selectAll);
   const activeModal = useSelector((state) => state.modals.activeModal);
   const channelNames = channels.map((item) => item.name);
-  console.log('channels', channelNames);
   const targetChannel = channels.find((c) => c.id === activeModal.id);
   const dispatch = useDispatch();
   const ref = useRef(null);
@@ -37,12 +37,14 @@ const RenameChannel = () => {
     },
     validationSchema,
     onSubmit: ({ name }, { setSubmitting }) => {
+      const filteredName = filter.clean(name);
       const handleResponse = () => {
         dispatch(setActiveModal(null));
         setSubmitting(false);
+        console.log('lol1', name);
         toast.success(t('notice.renameChannel'));
       };
-      renameChannel({ ...targetChannel, name }, handleResponse);
+      renameChannel({ ...targetChannel, name: filteredName }, handleResponse);
     },
   });
   return (

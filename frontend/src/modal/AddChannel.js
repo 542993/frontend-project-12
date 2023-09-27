@@ -1,4 +1,5 @@
 import { Button, Form } from 'react-bootstrap';
+import filter from 'leo-profanity';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
@@ -29,7 +30,7 @@ const AddChannel = () => {
     },
     validationSchema,
     onSubmit: ({ name }, { setSubmitting }) => {
-      console.log('name', name);
+      const filteredName = filter.clean(name);
       const handleResponse = ({ data }) => {
         console.log('response', data);
         dispatch(setCurrentChannel(data.id));
@@ -37,7 +38,7 @@ const AddChannel = () => {
         setSubmitting(false);
         toast.success(t('notice.newChannel'));
       };
-      addChannel({ name }, handleResponse);
+      addChannel({ name: filteredName }, handleResponse);
     },
   });
   return (

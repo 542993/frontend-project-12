@@ -18,7 +18,6 @@ const init = async () => {
   const ru = filter.getDictionary('ru');
   const eng = filter.getDictionary('eng');
   const rueng = [...ru, ...eng];
-  console.log('lol', rueng);
   filter.add(rueng);
   const socket = io();
   const i18n = i18next.createInstance();
