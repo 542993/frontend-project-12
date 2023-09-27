@@ -17,7 +17,6 @@ export const ChatApiProvider = ({ socket, children }) => {
     },
     addChannel: (data, handleResponse) => {
       socket.emit('newChannel', data, (res) => {
-        console.log('data', data);
         checkStatus(res, handleResponse);
       });
     },
