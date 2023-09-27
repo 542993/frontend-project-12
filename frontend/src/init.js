@@ -14,7 +14,6 @@ import { addMessage } from './slices/messagesSlice';
 import resources from './locales/index.js';
 
 const init = async () => {
-  console.log(filter, filter);
   const ru = filter.getDictionary('ru');
   const eng = filter.getDictionary('eng');
   const rueng = [...ru, ...eng];
