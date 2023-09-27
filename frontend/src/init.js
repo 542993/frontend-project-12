@@ -14,7 +14,12 @@ import { addMessage } from './slices/messagesSlice';
 import resources from './locales/index.js';
 
 const init = async () => {
-  filter.loadDictionary('ru');
+  console.log(filter, filter);
+  const ru = filter.getDictionary('ru');
+  const eng = filter.getDictionary('eng');
+  const rueng = [...ru, ...eng];
+  console.log('lol', rueng);
+  filter.add(rueng);
   const socket = io();
   const i18n = i18next.createInstance();
   socket.on('newMessage', (message) => {
