@@ -10,7 +10,7 @@ export default {
     },
     error: {
       wrongLength: 'От 3 до 20 символов',
-      minLength: 'Минимум 6 символов',
+      minLength: 'Не менее 6 символов',
       required: 'Обязательное поле',
       wrongData: 'Неверные имя пользователя или пароль',
       passwordsMustMutch: 'Пароли должны совпадать',
