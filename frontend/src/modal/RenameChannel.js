@@ -50,7 +50,6 @@ const RenameChannel = () => {
   });
   return (
   <Form onSubmit={f.handleSubmit}>
-      <Form.Label className="visually-hidden" htmlFor="name">{t('modal.label')}</Form.Label>
       <Form.Control
         type="text"
         id="name"
@@ -62,6 +61,7 @@ const RenameChannel = () => {
         isInvalid={f.touched.name && f.errors.name}
         disabled={f.isSubmitting}
       />
+      <Form.Label className="visually-hidden" htmlFor="name">{t('modal.label')}</Form.Label>
       <Form.Control.Feedback type="invalid">
         {f.errors.name}
       </Form.Control.Feedback>
