@@ -38,6 +38,7 @@ const RenameChannel = () => {
     validationSchema,
     onSubmit: ({ name }, { setSubmitting }) => {
       const filteredName = filter.clean(name);
+      console.log('filteredName', filteredName);
       const handleResponse = () => {
         dispatch(setActiveModal(null));
         setSubmitting(false);
