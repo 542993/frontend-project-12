@@ -7,7 +7,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import { I18nextProvider, initReactI18next } from 'react-i18next';
 import App from './App';
 import store from './slices';
-import RollbarProvider from './Components/RollbarProvider';
 import { ChatApiProvider } from './context/chatApiProvider';
 import AuthProvider from './context/authProvider';
 import { addChannel, renameChannel, removeChannel } from './slices/channelsSlice';
@@ -41,20 +40,14 @@ const init = async () => {
         escapeValue: false,
       },
     });
-  // function TestError() {
-  //   const a = null;
-  //   return a.hello1();
-  // }
 
   return (
     <AuthProvider>
       <I18nextProvider i18n={i18n}>
         <StoreProvider store={store}>
             <ChatApiProvider socket={socket}>
-              <RollbarProvider>
-                <App />
-                <ToastContainer />
-              </RollbarProvider>
+              <App />
+              <ToastContainer />
             </ChatApiProvider>
         </StoreProvider>
       </I18nextProvider>

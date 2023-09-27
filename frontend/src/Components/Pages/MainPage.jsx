@@ -14,12 +14,6 @@ const MainPage = () => {
   /* eslint-disable-next-line react-hooks/exhaustive-deps */
   }, []);
 
-  if (activeModal) {
-    console.log('yes');
-  } else {
-    console.log('No');
-  }
-
   return (
     <>
       <div className="d-flex flex-column h-100">
