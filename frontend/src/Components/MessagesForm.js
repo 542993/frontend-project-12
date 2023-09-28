@@ -71,7 +71,7 @@ const MessageForm = () => {
             <ArrowRightSquareFill size={20} />
             <span className="visually-hidden">{t('messageButton')}</span>
           </Button>
-      </InputGroup>
+        </InputGroup>
       </Form>
     </>
 
