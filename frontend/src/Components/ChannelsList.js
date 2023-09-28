@@ -14,8 +14,9 @@ const ChannelsList = () => {
     const variant = channel.id === currentChannelId ? 'secondary' : null;
     const dropDownButton = (
       <>
-        <Dropdown.Toggle split variant={variant} id="dropdown-split-basic" className="border-0 w-auto" />
+        <Dropdown.Toggle split variant={variant} id="dropdown-split-basic" className="border-0 w-auto">
           <span className="visually-hidden">{t('channelSettings')}</span>
+        </Dropdown.Toggle>
         <Dropdown.Menu>
           <Dropdown.Item onClick={() => dispatch(setActiveModal({ type: 'remove', id: channel.id }))}>{t('channelButton.remove')}</Dropdown.Item>
           <Dropdown.Item onClick={() => dispatch(setActiveModal({ type: 'rename', id: channel.id }))}>{t('channelButton.rename')}</Dropdown.Item>

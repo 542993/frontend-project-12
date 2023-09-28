@@ -12,6 +12,7 @@ const ModalContainer = () => {
     remove: 'Удалить канал',
     rename: 'Переименовать канал',
   };
+
   return (
     <Modal show={activeModal}>
       <Modal.Header>
