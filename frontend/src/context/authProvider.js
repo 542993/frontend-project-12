@@ -1,7 +1,7 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import authAPI from '../api/authAPI';
 import { AuthContext } from './index.js';
-// eslint-disable-next-line
+
 const AuthProvider = ({ children }) => {
   const { signIn, signUp } = authAPI();
   const currentUser = JSON.parse(localStorage.getItem('user'));
@@ -16,10 +16,16 @@ const AuthProvider = ({ children }) => {
     localStorage.removeItem('user');
     setUser(null);
   };
+
   return (
-    <AuthContext.Provider value={useMemo(() => (
-      { user, signIn, signUp, logIn, logOut }), [user, signIn, signUp, logIn, logOut])}
-    >
+    // eslint-disable-next-line react/jsx-no-constructed-context-values
+    <AuthContext.Provider value={
+      { user,
+        logIn,
+        logOut,
+        signIn,
+        signUp,
+      }}>
       {children}
     </AuthContext.Provider>
   );
