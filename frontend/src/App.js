@@ -1,5 +1,10 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+} from 'react-router-dom';
 import LoginPage from './Components/Pages/LoginPage';
 import MainPage from './Components/Pages/MainPage';
 import NotFoundPage from './Components/Pages/NotFoundPage';
