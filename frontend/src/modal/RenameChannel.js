@@ -42,14 +42,13 @@ const RenameChannel = () => {
       const handleResponse = () => {
         dispatch(setActiveModal(null));
         setSubmitting(false);
-        console.log('lol1', name);
         toast.success(t('notice.renameChannel'));
       };
       renameChannel({ ...targetChannel, name: filteredName }, handleResponse);
     },
   });
   return (
-  <Form onSubmit={f.handleSubmit}>
+    <Form onSubmit={f.handleSubmit}>
       <Form.Control
         type="text"
         id="name"

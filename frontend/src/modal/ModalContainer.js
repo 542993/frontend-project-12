@@ -20,7 +20,7 @@ const ModalContainer = () => {
         <CloseButton aria-label="Close" className="btn btn-close" onClick={() => dispatch(setActiveModal(null))} />
       </Modal.Header>
       <Modal.Body>
-         {getModal(activeModal.type)}
+        {getModal(activeModal.type)}
       </Modal.Body>
     </Modal>
   );

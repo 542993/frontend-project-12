@@ -46,8 +46,8 @@ const MessageForm = () => {
 
   return (
     <>
-          <div className="small text-muted">{renderDeliveryStatus()}</div>
-    <Form noValidate onSubmit={f.handleSubmit} className="py-1 border rounded-2">
+      <div className="small text-muted">{renderDeliveryStatus()}</div>
+      <Form noValidate onSubmit={f.handleSubmit} className="py-1 border rounded-2">
       <InputGroup hasValidation>
         <Form.Control
           ref={inputEl}
@@ -72,7 +72,7 @@ const MessageForm = () => {
           <span className="visually-hidden">{t('messageButton')}</span>
         </Button>
       </InputGroup>
-    </Form>
+      </Form>
     </>
 
   );

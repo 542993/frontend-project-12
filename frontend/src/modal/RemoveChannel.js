@@ -28,10 +28,10 @@ const RemoveChannel = () => {
       <p className="lead">{t('modal.confirmRemove')}</p>
       <div className="d-flex justify-content-end">
         <Button variant="btn-secondary" onClick={() => dispatch(setActiveModal(null))} className="me-2">
-        {t('modal.cancel')}
+          {t('modal.cancel')}
         </Button>
         <Button variant="danger" type="submit" disabled={f.isSubmitting}>
-        {t('modal.delete')}
+          {t('modal.delete')}
         </Button>
       </div>
     </Form>

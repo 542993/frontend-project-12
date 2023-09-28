@@ -48,10 +48,10 @@ const init = async () => {
     <AuthProvider>
       <I18nextProvider i18n={i18n}>
         <StoreProvider store={store}>
-            <ChatApiProvider socket={socket}>
-              <App />
-              <ToastContainer />
-            </ChatApiProvider>
+          <ChatApiProvider socket={socket}>
+            <App />
+            <ToastContainer />
+          </ChatApiProvider>
         </StoreProvider>
       </I18nextProvider>
     </AuthProvider>

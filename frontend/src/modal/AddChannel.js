@@ -42,25 +42,25 @@ const AddChannel = () => {
     },
   });
   return (
-  <Form onSubmit={f.handleSubmit}>
-      <Form.Label className="visually-hidden" htmlFor="name">{t('modal.label')}</Form.Label>
-      <Form.Control
-        type="text"
-        id="name"
-        name="name"
-        onChange={f.handleChange}
-        value={f.values.name}
-        className="mb-2 form-control"
-        isInvalid={f.touched.name && f.errors.name}
-        disabled={f.isSubmitting}
-      />
-      <Form.Control.Feedback type="invalid">
-        {f.errors.name}
-      </Form.Control.Feedback>
-      <div className="d-flex justify-content-end">
-        <Button variant="secondary" onClick={() => dispatch(setActiveModal(null))} className="me-2">{t('modal.cancel')}</Button>
-        <Button variant="primary" type="submit">{t('modal.submit')}</Button>
-      </div>
+    <Form onSubmit={f.handleSubmit}>
+    <Form.Label className="visually-hidden" htmlFor="name">{t('modal.label')}</Form.Label>
+    <Form.Control
+      type="text"
+      id="name"
+      name="name"
+      onChange={f.handleChange}
+      value={f.values.name}
+      className="mb-2 form-control"
+      isInvalid={f.touched.name && f.errors.name}
+      disabled={f.isSubmitting}
+    />
+    <Form.Control.Feedback type="invalid">
+      {f.errors.name}
+    </Form.Control.Feedback>
+    <div className="d-flex justify-content-end">
+      <Button variant="secondary" onClick={() => dispatch(setActiveModal(null))} className="me-2">{t('modal.cancel')}</Button>
+      <Button variant="primary" type="submit">{t('modal.submit')}</Button>
+    </div>
   </Form>
   );
 };

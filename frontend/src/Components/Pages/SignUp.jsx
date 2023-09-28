@@ -2,7 +2,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import { useFormik } from 'formik';
-import { Button, Form, FloatingLabel, Image } from 'react-bootstrap';
+import {
+  Button,
+  Form,
+  FloatingLabel,
+  Image,
+} from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 import { useAuth } from '../../hooks/index.jsx';

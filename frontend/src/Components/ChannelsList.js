@@ -33,7 +33,7 @@ const ChannelsList = () => {
           >
             {`# ${channel.name}`}
           </Button>
-        {channel.removable && dropDownButton}
+          {channel.removable && dropDownButton}
         </Dropdown>
       </li>
     );
