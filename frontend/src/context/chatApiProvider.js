@@ -11,7 +11,6 @@ export const ChatApiProvider = ({ socket, children }) => {
   const chatAPI = useMemo(() => ({
     addMessage: (msg, handleResponse) => {
       socket.emit('newMessage', msg, (res) => {
-        console.log('response', res);
         checkStatus(res, handleResponse);
       });
     },
