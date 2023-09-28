@@ -94,7 +94,7 @@ const SignUp = () => {
               isInvalid={(f.touched.username && f.errors.username) || signUpFailed}
               disabled={f.isSubmitting}
             />
-           {(f.touched.username && f.errors.username)
+            {(f.touched.username && f.errors.username)}
             && <Form.Control.Feedback type="invalid">{f.errors.username}</Form.Control.Feedback>}
           </FloatingLabel>
           <FloatingLabel controlId="floatingPassword" label={t('signUpPage.passwordLabel')} className="mb-4">
@@ -122,7 +122,7 @@ const SignUp = () => {
               isInvalid={(f.touched.confirmPassword && f.errors.confirmPassword) || signUpFailed}
               disabled={f.isSubmitting}
             />
-             {(f.touched.confirmPassword && f.errors.confirmPassword)
+            {(f.touched.confirmPassword && f.errors.confirmPassword)
             && <Form.Control.Feedback type="invalid">{f.errors.confirmPassword}</Form.Control.Feedback>}
             <Form.Control.Feedback type="invalid">
               { signUpFailed ? t('signUpPage.userExist') : ''}

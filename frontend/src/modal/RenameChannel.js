@@ -68,7 +68,7 @@ const RenameChannel = () => {
         <Button variant="secondary" onClick={() => dispatch(setActiveModal(null))} className="me-2">{t('modal.cancel')}</Button>
         <Button variant="primary" type="submit">{t('modal.submit')}</Button>
       </div>
-  </Form>
+    </Form>
   );
 };
 export default RenameChannel;

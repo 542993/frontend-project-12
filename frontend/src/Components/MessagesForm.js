@@ -48,29 +48,29 @@ const MessageForm = () => {
     <>
       <div className="small text-muted">{renderDeliveryStatus()}</div>
       <Form noValidate onSubmit={f.handleSubmit} className="py-1 border rounded-2">
-      <InputGroup hasValidation>
-        <Form.Control
-          ref={inputEl}
-          onChange={f.handleChange}
-          name="message"
-          id="message"
-          aria-label={t('messageLabel')}
-          placeholder={t('messagePlaceholder')}
-          className="border-0 p-0 ps-2"
-          type="text"
-          value={f.values.message}
-          disabled={f.isSubmitting}
-        />
-        <Form.Label className="visually-hidden" htmlFor="message">{t('messageLabel')}</Form.Label>
-        <Button
-          type="submit"
-          variant={null}
-          className="btn-group-vertical border-0"
-          disabled={f.isSubmitting || !f.values.message}
-        >
-          <ArrowRightSquareFill size={20} />
-          <span className="visually-hidden">{t('messageButton')}</span>
-        </Button>
+        <InputGroup hasValidation>
+          <Form.Control
+            ref={inputEl}
+            onChange={f.handleChange}
+            name="message"
+            id="message"
+            aria-label={t('messageLabel')}
+            placeholder={t('messagePlaceholder')}
+            className="border-0 p-0 ps-2"
+            type="text"
+            value={f.values.message}
+            disabled={f.isSubmitting}
+          />
+          <Form.Label className="visually-hidden" htmlFor="message">{t('messageLabel')}</Form.Label>
+          <Button
+            type="submit"
+            variant={null}
+            className="btn-group-vertical border-0"
+            disabled={f.isSubmitting || !f.values.message}
+          >
+            <ArrowRightSquareFill size={20} />
+            <span className="visually-hidden">{t('messageButton')}</span>
+          </Button>
       </InputGroup>
       </Form>
     </>
