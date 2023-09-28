@@ -54,14 +54,14 @@ const AddChannel = () => {
         isInvalid={f.touched.name && f.errors.name}
         disabled={f.isSubmitting}
       />
-     <Form.Control.Feedback type="invalid">
-      {f.errors.name}
-    </Form.Control.Feedback>
+      <Form.Control.Feedback type="invalid">
+        {f.errors.name}
+      </Form.Control.Feedback>
       <div className="d-flex justify-content-end">
       <Button variant="secondary" onClick={() => dispatch(setActiveModal(null))} className="me-2">{t('modal.cancel')}</Button>
       <Button variant="primary" type="submit">{t('modal.submit')}</Button>
-    </div>
-  </Form>
+      </div>
+    </Form>
   );
 };
 export default AddChannel;

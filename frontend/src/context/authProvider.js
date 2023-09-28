@@ -3,9 +3,8 @@ import authAPI from '../api/authAPI';
 import { AuthContext } from './index.js';
 
 const AuthProvider = ({ children }) => {
-   // eslint-disable-next-line react/jsx-no-constructed-context-values
-  const { signIn, signUp } = authAPI();
-  
+// eslint-disable-next-line react/jsx-no-constructed-context-values
+  const { signIn, signUp } = authAPI();  
   const currentUser = JSON.parse(localStorage.getItem('user'));
   const initialState = currentUser || null;
   const [user, setUser] = useState(initialState);

@@ -95,7 +95,8 @@ const SignUp = () => {
               disabled={f.isSubmitting}
             />
             {(f.touched.username && f.errors.username)
-            && <Form.Control.Feedback type="invalid">{f.errors.username}</Form.Control.Feedback>}
+            && 
+            <Form.Control.Feedback type="invalid">{f.errors.username}</Form.Control.Feedback>}
           </FloatingLabel>
           <FloatingLabel controlId="floatingPassword" label={t('signUpPage.passwordLabel')} className="mb-4">
             <Form.Control
