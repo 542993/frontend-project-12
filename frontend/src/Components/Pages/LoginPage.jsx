@@ -39,13 +39,13 @@ const LoginPage = () => {
     } catch (err) {
       switch (err.code) {
         case 'ERR_NETWORK':
-          throw new Error(`Ошибка соединения: ${err}`);
+          throw new Error(`${t('notice.netWorkError')}: ${err}`);
         case 'ERR_BAD_REQUEST':
           setAuthFailed(true);
           setSubmitting(false);
-          throw new Error(`{t('error.wrongData')} ${err}`);
+          throw new Error(`${t('notice.getData')} ${err}`);
         default:
-          throw new Error(`Неизвестная ошибка при авторизации: ${err}`);
+          throw new Error(`${t('notice.signIn')}: ${err}`);
       }
     }
   };

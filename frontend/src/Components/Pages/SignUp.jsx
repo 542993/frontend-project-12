@@ -41,13 +41,13 @@ const SignUp = () => {
       switch (err.code) {
         case 'ERR_NETWORK':
           toast.error(t('notice.netWorkError'));
-          throw new Error(`t('notice.netWorkError'): ${err}`);
+          throw new Error(`${t('notice.netWorkError')}: ${err}`);
         case 'ERR_BAD_REQUEST':
           setSignUpFailed(true);
           setSubmitting(false);
           throw new Error(`${t('error.userAlreadyExist')}: ${err}`);
         default:
-          throw new Error(`t('notice.signUp') ${err}`);
+          throw new Error(`${t('notice.signUp')}: ${err}`);
       }
     }
   };
@@ -94,7 +94,7 @@ const SignUp = () => {
               isInvalid={(f.touched.username && f.errors.username) || signUpFailed}
               disabled={f.isSubmitting}
             />
-            {(f.touched.username && f.errors.username)}
+            {(f.touched.username && f.errors.username)
             && <Form.Control.Feedback type="invalid">{f.errors.username}</Form.Control.Feedback>}
           </FloatingLabel>
           <FloatingLabel controlId="floatingPassword" label={t('signUpPage.passwordLabel')} className="mb-4">
