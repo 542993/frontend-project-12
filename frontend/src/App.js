@@ -10,27 +10,28 @@ import MainPage from './Components/Pages/MainPage';
 import NotFoundPage from './Components/Pages/NotFoundPage';
 import SignUp from './Components/Pages/SignUp';
 import './App.css';
+import { routesApp } from './routes';
 import useAuthContext from './hooks/useAuthContext';
 
 const PrivateRoute = ({ children }) => {
   const { user } = useAuthContext();
-  return user ? children : <Navigate to="/login" />;
+  return user ? children : <Navigate to={routesApp.loginPage} />;
 };
 
 const App = () => (
   <BrowserRouter>
     <Routes>
       <Route
-        path="/"
+        path={routesApp.homePage}
         element={(
           <PrivateRoute>
             <MainPage />
           </PrivateRoute>
         )}
       />
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="*" element={<NotFoundPage />} />
-      <Route path="/signup" element={<SignUp />} />
+      <Route path={routesApp.loginPage} element={<LoginPage />} />
+      <Route path={routesApp.notFoundPag} element={<NotFoundPage />} />
+      <Route path={routesApp.signupPage} element={<SignUp />} />
     </Routes>
   </BrowserRouter>
 );

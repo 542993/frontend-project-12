@@ -17,7 +17,6 @@ import img from '../../assets/loginPage.jpeg';
 const LoginPage = () => {
   const { t } = useTranslation();
   const { user, logIn, signIn } = useAuthContext();
-  console.log('signIn', signIn);
   const inputEl = useRef(null);
   const navigate = useNavigate();
   const [authFailed, setAuthFailed] = useState(false);

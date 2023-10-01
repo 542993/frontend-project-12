@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 import useChat from '../hooks/useChat';
-import { setActiveModal } from '../slices/modalSlice';
+import { hideModal } from '../slices/modalSlice';
 import { setCurrentChannel, selectors } from '../slices/channelsSlice';
 
 const AddChannel = () => {
@@ -34,7 +34,7 @@ const AddChannel = () => {
       const handleResponse = ({ data }) => {
         console.log('response', data);
         dispatch(setCurrentChannel(data.id));
-        dispatch(setActiveModal(null));
+        dispatch(hideModal());
         setSubmitting(false);
         toast.success(t('notice.newChannel'));
       };
@@ -58,7 +58,7 @@ const AddChannel = () => {
         {f.errors.name}
       </Form.Control.Feedback>
       <div className="d-flex justify-content-end">
-        <Button variant="secondary" onClick={() => dispatch(setActiveModal(null))} className="me-2">{t('modal.cancel')}</Button>
+        <Button variant="secondary" onClick={() => dispatch(hideModal())} className="me-2">{t('modal.cancel')}</Button>
         <Button variant="primary" type="submit">{t('modal.submit')}</Button>
       </div>
     </Form>

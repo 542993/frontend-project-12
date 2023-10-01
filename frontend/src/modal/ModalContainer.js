@@ -1,12 +1,14 @@
 import CloseButton from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useSelector, useDispatch } from 'react-redux';
-import { setActiveModal } from '../slices/modalSlice';
+import { hideModal } from '../slices/modalSlice';
 import getModal from '.';
 
 const ModalContainer = () => {
+  console.log('modalconteiner');
   const dispatch = useDispatch();
-  const activeModal = useSelector((state) => state.modals.activeModal);
+  const activeModal = useSelector((state) => state.modals.type);
+  console.log('activeModal', activeModal);
   const modalTitle = {
     add: 'Добавить канал',
     remove: 'Удалить канал',
@@ -16,11 +18,11 @@ const ModalContainer = () => {
   return (
     <Modal show={activeModal}>
       <Modal.Header>
-        <Modal.Title className="h4">{modalTitle[activeModal.type]}</Modal.Title>
-        <CloseButton aria-label="Close" className="btn btn-close" onClick={() => dispatch(setActiveModal(null))} />
+        <Modal.Title className="h4">{modalTitle[activeModal]}</Modal.Title>
+        <CloseButton aria-label="Close" className="btn btn-close" onClick={() => dispatch(hideModal())} />
       </Modal.Header>
       <Modal.Body>
-        {getModal(activeModal.type)}
+        {getModal(activeModal)}
       </Modal.Body>
     </Modal>
   );

@@ -7,16 +7,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 import useChat from '../hooks/useChat';
-import { setActiveModal } from '../slices/modalSlice';
+import { hideModal } from '../slices/modalSlice';
 import { selectors } from '../slices/channelsSlice';
 
 const RenameChannel = () => {
   const { t } = useTranslation();
   const { renameChannel } = useChat();
   const channels = useSelector(selectors.selectAll);
-  const activeModal = useSelector((state) => state.modals.activeModal);
+  const modalInfo = useSelector((state) => state.modals);
+  console.log('active modal', modalInfo);
   const channelNames = channels.map((item) => item.name);
-  const targetChannel = channels.find((c) => c.id === activeModal.id);
+  const targetChannel = channels.find((c) => c.id === modalInfo.id);
   const dispatch = useDispatch();
   const ref = useRef(null);
   useEffect(() => {
@@ -40,7 +41,7 @@ const RenameChannel = () => {
       const filteredName = filter.clean(name);
       console.log('filteredName', filteredName);
       const handleResponse = () => {
-        dispatch(setActiveModal(null));
+        dispatch(hideModal());
         setSubmitting(false);
         toast.success(t('notice.renameChannel'));
       };
@@ -65,7 +66,7 @@ const RenameChannel = () => {
         {f.errors.name}
       </Form.Control.Feedback>
       <div className="d-flex justify-content-end">
-        <Button variant="secondary" onClick={() => dispatch(setActiveModal(null))} className="me-2">{t('modal.cancel')}</Button>
+        <Button variant="secondary" onClick={() => dispatch(hideModal())} className="me-2">{t('modal.cancel')}</Button>
         <Button variant="primary" type="submit">{t('modal.submit')}</Button>
       </div>
     </Form>

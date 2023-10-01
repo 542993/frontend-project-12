@@ -8,7 +8,7 @@ import ModalContainer from '../../modal/ModalContainer';
 
 const MainPage = () => {
   const dispatch = useDispatch();
-  const activeModal = useSelector((state) => state.modals.activeModal);
+  const activeModal = useSelector((state) => state.modals.type);
   useEffect(() => {
     dispatch(fetchData());
   /* eslint-disable-next-line react-hooks/exhaustive-deps */

@@ -3,23 +3,23 @@ import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 import { Button, Form } from 'react-bootstrap';
-import { setActiveModal } from '../slices/modalSlice';
+import { hideModal } from '../slices/modalSlice';
 import useChat from '../hooks/useChat';
 
 const RemoveChannel = () => {
   const { t } = useTranslation();
-  const activeModal = useSelector((state) => state.modals.activeModal);
+  const modalInfo = useSelector((state) => state.modals);
   const { removeChannel } = useChat();
   const dispatch = useDispatch();
   const f = useFormik({
     initialValues: {},
     onSubmit: (_, { setSubmitting }) => {
       const handleResponse = () => {
-        dispatch(setActiveModal(null));
+        dispatch(hideModal());
         setSubmitting(false);
         toast.success(t('notice.removeChannel'));
       };
-      removeChannel({ id: activeModal.id }, handleResponse);
+      removeChannel({ id: modalInfo.id }, handleResponse);
     },
   });
 
@@ -27,7 +27,7 @@ const RemoveChannel = () => {
     <Form onSubmit={f.handleSubmit}>
       <p className="lead">{t('modal.confirmRemove')}</p>
       <div className="d-flex justify-content-end">
-        <Button variant="btn-secondary" onClick={() => dispatch(setActiveModal(null))} className="me-2">
+        <Button variant="btn-secondary" onClick={() => dispatch(hideModal())} className="me-2">
           {t('modal.cancel')}
         </Button>
         <Button variant="danger" type="submit" disabled={f.isSubmitting}>

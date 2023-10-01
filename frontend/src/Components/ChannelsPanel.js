@@ -3,9 +3,10 @@ import { PlusSquareFill } from 'react-bootstrap-icons';
 import { Button } from 'react-bootstrap';
 import ChannelsList from './ChannelsList';
 import { selectors } from '../slices/channelsSlice';
-import { setActiveModal } from '../slices/modalSlice';
+import { showModal } from '../slices/modalSlice';
 
 const ChannelsPanel = () => {
+  console.log('channelpannel');
   const dispatch = useDispatch();
   const channels = useSelector(selectors.selectAll);
   const currentChannelId = useSelector((state) => state.channels.currentChannelId);
@@ -16,7 +17,7 @@ const ChannelsPanel = () => {
         <span>Каналы</span>
         <Button
           className="p-0 text-primary btn-group-vertical border-0 form-control w-auto"
-          onClick={() => dispatch(setActiveModal({ type: 'add' }))}
+          onClick={() => dispatch(showModal({ type: 'add' }))}
           variant={null}
         >
           <PlusSquareFill size={20} />

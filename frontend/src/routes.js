@@ -10,4 +10,5 @@ export const routesApp = {
   homePage: '/',
   loginPage: '/login',
   signupPage: '/signup',
+  notFoundPag: '/*',
 };
