@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
-import useChat from '../hooks/useAuthContext';
+import useChat from '../hooks/useChat';
 import { setActiveModal } from '../slices/modalSlice';
 import { setCurrentChannel, selectors } from '../slices/channelsSlice';
 
