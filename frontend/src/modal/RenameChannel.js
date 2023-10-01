@@ -6,7 +6,7 @@ import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
-import { useChat } from '../hooks';
+import useChat from '../hooks/useChat';
 import { setActiveModal } from '../slices/modalSlice';
 import { selectors } from '../slices/channelsSlice';
 

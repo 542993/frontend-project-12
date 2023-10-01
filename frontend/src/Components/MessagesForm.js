@@ -5,7 +5,8 @@ import { useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import { Button, Form, InputGroup } from 'react-bootstrap';
 import { ArrowRightSquareFill } from 'react-bootstrap-icons';
-import { useChat, useAuth } from '../hooks';
+import useAuthContext from '../hooks/useAuthContext';
+import useChat from '../hooks/useChat';
 
 const MessageForm = () => {
   const { t } = useTranslation();
@@ -13,7 +14,7 @@ const MessageForm = () => {
   const inputEl = useRef(null);
   const { addMessage } = useChat();
   const [delivered, setDelivered] = useState(false);
-  const { user } = useAuth();
+  const { user } = useAuthContext();
   const f = useFormik({
     initialValues: { message: '' },
     onSubmit: async ({ message }, { resetForm, setSubmitting }) => {

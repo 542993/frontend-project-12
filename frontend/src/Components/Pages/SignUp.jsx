@@ -10,14 +10,14 @@ import {
 } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
-import { useAuth } from '../../hooks/index.jsx';
+import useAuthContext from '../../hooks/useAuthContext';
 import AuthContainer from '../AuthContainer';
 import { routesApp } from '../../routes.js';
 import img from '../../assets/signUp.jpg';
 
 const SignUp = () => {
   const { t } = useTranslation();
-  const { user, logIn, signUp } = useAuth();
+  const { user, logIn, signUp } = useAuthContext();
   const inputEl = useRef(null);
   const navigate = useNavigate();
   const [signUpFailed, setSignUpFailed] = useState(false);

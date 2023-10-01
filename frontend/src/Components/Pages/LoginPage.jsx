@@ -9,14 +9,15 @@ import {
 } from 'react-bootstrap';
 import { useNavigate, Link } from 'react-router-dom';
 import * as yup from 'yup';
-import { useAuth } from '../../hooks/index.jsx';
+import useAuthContext from '../../hooks/useAuthContext';
 import AuthContainer from '../AuthContainer';
 import { routesApp } from '../../routes.js';
 import img from '../../assets/loginPage.jpeg';
 
 const LoginPage = () => {
   const { t } = useTranslation();
-  const { user, logIn, signIn } = useAuth();
+  const { user, logIn, signIn } = useAuthContext();
+  console.log('signIn', signIn);
   const inputEl = useRef(null);
   const navigate = useNavigate();
   const [authFailed, setAuthFailed] = useState(false);

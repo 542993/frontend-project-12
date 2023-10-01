@@ -10,10 +10,10 @@ import MainPage from './Components/Pages/MainPage';
 import NotFoundPage from './Components/Pages/NotFoundPage';
 import SignUp from './Components/Pages/SignUp';
 import './App.css';
-import { useAuth } from './hooks';
+import useAuthContext from './hooks/useAuthContext';
 
 const PrivateRoute = ({ children }) => {
-  const { user } = useAuth();
+  const { user } = useAuthContext();
   return user ? children : <Navigate to="/login" />;
 };
 

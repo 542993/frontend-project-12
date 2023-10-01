@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Button from 'react-bootstrap/Button';
-import { useAuth } from '../hooks/index';
+import useAuthContext from '../hooks/useAuthContext';
 
 const Header = () => {
   const { t } = useTranslation();
-  const { user, logOut } = useAuth();
+  const { user, logOut } = useAuthContext();
   return (
     <nav className="shadow-sm navbar navbar-expand-lg navbar-light bg-white">
       <div className="container">

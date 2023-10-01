@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 import { Button, Form } from 'react-bootstrap';
 import { setActiveModal } from '../slices/modalSlice';
-import { useChat } from '../hooks/index';
+import useChat from '../hooks/useAuthContext';
 
 const RemoveChannel = () => {
   const { t } = useTranslation();
