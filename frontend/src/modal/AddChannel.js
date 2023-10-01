@@ -58,8 +58,8 @@ const AddChannel = () => {
         {f.errors.name}
       </Form.Control.Feedback>
       <div className="d-flex justify-content-end">
-      <Button variant="secondary" onClick={() => dispatch(setActiveModal(null))} className="me-2">{t('modal.cancel')}</Button>
-      <Button variant="primary" type="submit">{t('modal.submit')}</Button>
+        <Button variant="secondary" onClick={() => dispatch(setActiveModal(null))} className="me-2">{t('modal.cancel')}</Button>
+        <Button variant="primary" type="submit">{t('modal.submit')}</Button>
       </div>
     </Form>
   );
