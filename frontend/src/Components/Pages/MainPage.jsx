@@ -9,9 +9,11 @@ import getAuthHeader from '../../utils';
 import routesAPI from '../../routes';
 import { setChannels, setCurrentChannel } from '../../slices/channelsSlice';
 import { setMessages } from '../../slices/messagesSlice';
+import useAuthContext from '../../hooks/useAuthContext';
 
 const MainPage = () => {
   const dispatch = useDispatch();
+  const { logOut } = useAuthContext();
   const activeModal = useSelector((state) => state.modals.type);
   useEffect(() => {
     const fetch = async () => {
@@ -22,7 +24,9 @@ const MainPage = () => {
         dispatch(setCurrentChannel(currentChannelId));
         dispatch(setMessages(messages));
       } catch (error) {
-        console.log('error', error);
+        if (error.response.status === 401) {
+          logOut();
+        }
       }
     };
     fetch();
