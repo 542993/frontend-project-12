@@ -16,16 +16,10 @@ import img from '../../assets/loginPage.jpeg';
 
 const LoginPage = () => {
   const { t } = useTranslation();
-  const { user, logIn, signIn } = useAuthContext();
+  const { logIn, signIn } = useAuthContext();
   const inputEl = useRef(null);
   const navigate = useNavigate();
   const [authFailed, setAuthFailed] = useState(false);
-
-  useEffect(() => {
-    if (user) {
-      navigate(routesApp.homePage);
-    }
-  }, [user, navigate]);
 
   useEffect(() => {
     inputEl.current.focus();
@@ -33,8 +27,11 @@ const LoginPage = () => {
 
   const handleSubmitForm = async (formData, setSubmitting) => {
     try {
+      console.log('formData', formData);
       const userData = await signIn(formData);
+      console.log('userData', userData);
       logIn(userData);
+      navigate(routesApp.homePage);
       setSubmitting(false);
     } catch (err) {
       switch (err.code) {

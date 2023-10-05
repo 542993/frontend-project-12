@@ -24,13 +24,11 @@ const MessageForm = () => {
         body: filteredText,
         username: user.username,
       };
-      const handleResponse = ({ status }) => {
-        if (status === 'ok') {
-          setDelivered(true);
-          setSubmitting(false);
-          resetForm();
-          setTimeout(() => setDelivered(false), 2000);
-        }
+      const handleResponse = () => {
+        setDelivered(true);
+        setSubmitting(false);
+        resetForm();
+        setDelivered(false);
       };
       addMessage(newMessage, handleResponse);
     },

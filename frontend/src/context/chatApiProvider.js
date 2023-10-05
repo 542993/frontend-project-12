@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ChatApiContext } from '.';
 
 export const ChatApiProvider = ({ socket, children }) => {
@@ -7,24 +8,43 @@ export const ChatApiProvider = ({ socket, children }) => {
       callback(response);
     }
   };
-
+  const { t } = useTranslation();
   const chatAPI = useMemo(() => ({
     addMessage: (msg, handleResponse) => {
-      socket.emit('newMessage', msg, (res) => {
-        checkStatus(res, handleResponse);
+      socket.timeout(5000).emit('newMessage', msg, (err, response) => {
+        if (err) {
+          console.log(`${t('notice.netWorkError')}: ${err}`);
+        } else {
+          checkStatus(response, handleResponse);
+        }
       });
     },
     addChannel: (data, handleResponse) => {
-      socket.emit('newChannel', data, (res) => {
-        checkStatus(res, handleResponse);
+      socket.timeout(5000).emit('newChannel', data, (err, response) => {
+        if (err) {
+          console.log(`${t('notice.netWorkError')}: ${err}`);
+        } else {
+          checkStatus(response, handleResponse);
+        }
       });
     },
     renameChannel: (data, handleResponse) => {
-      console.log('renameData', data);
-      socket.emit('renameChannel', data, (res) => checkStatus(res, handleResponse));
+      socket.timeout(5000).emit('renameChannel', data, (err, response) => {
+        if (err) {
+          console.log(`${t('notice.netWorkError')}: ${err}`);
+        } else {
+          checkStatus(response, handleResponse);
+        }
+      });
     },
     removeChannel: (data, handleResponse) => {
-      socket.emit('removeChannel', data, (res) => checkStatus(res, handleResponse));
+      socket.timeout(5000).emit('removeChannel', data, (err, response) => {
+        if (err) {
+          console.log(`${t('notice.netWorkError')}: ${err}`);
+        } else {
+          checkStatus(response, handleResponse);
+        }
+      });
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }), []);

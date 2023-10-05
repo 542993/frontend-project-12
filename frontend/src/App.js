@@ -15,6 +15,7 @@ import useAuthContext from './hooks/useAuthContext';
 
 const PrivateRoute = ({ children }) => {
   const { user } = useAuthContext();
+  console.log('user main', user);
   return user ? children : <Navigate to={routesApp.loginPage} />;
 };
 

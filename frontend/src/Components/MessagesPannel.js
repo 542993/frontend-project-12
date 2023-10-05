@@ -7,6 +7,7 @@ const MessagesPanel = () => {
   const messages = useSelector(selectors.selectAll);
   const currentChannelId = useSelector((state) => state.channels.currentChannelId);
   const visibleMessages = messages.filter((m) => Number(m.channelId) === Number(currentChannelId));
+  console.log('visibleMessages', visibleMessages);
   return (
     <div className="col p-0 h-100">
       <div className="d-flex flex-column h-100">

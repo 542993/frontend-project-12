@@ -1,17 +1,32 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchData } from '../../slices/channelsSlice';
+import axios from 'axios';
 import Header from '../Header';
 import ChannelsPanel from '../ChannelsPanel';
 import MessagesPanel from '../MessagesPannel';
 import ModalContainer from '../../modal/ModalContainer';
+import getAuthHeader from '../../utils';
+import routesAPI from '../../routes';
+import { setChannels, setCurrentChannel } from '../../slices/channelsSlice';
+import { setMessages } from '../../slices/messagesSlice';
 
 const MainPage = () => {
   const dispatch = useDispatch();
   const activeModal = useSelector((state) => state.modals.type);
   useEffect(() => {
-    dispatch(fetchData());
-  /* eslint-disable-next-line react-hooks/exhaustive-deps */
+    const fetch = async () => {
+      try {
+        const { data } = await axios.get(routesAPI.dataPath(), { headers: getAuthHeader() });
+        const { currentChannelId, channels, messages } = data;
+        dispatch(setChannels(channels));
+        dispatch(setCurrentChannel(currentChannelId));
+        dispatch(setMessages(messages));
+      } catch (error) {
+        console.log('error', error);
+      }
+    };
+    fetch();
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
   }, []);
 
   return (
